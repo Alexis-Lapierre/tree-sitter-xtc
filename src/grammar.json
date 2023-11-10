@@ -1,0 +1,278 @@
+{
+  "name": "XTC",
+  "rules": {
+    "program": {
+      "type": "SYMBOL",
+      "name": "_lines"
+    },
+    "_lines": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_line"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_line_ending"
+          }
+        ]
+      }
+    },
+    "_line": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "command"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "port_comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_whitespace"
+        }
+      ]
+    },
+    "command": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "parameter"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_whitespace"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "indexes"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_whitespace"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_argument"
+              }
+            ]
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_whitespace"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "parameter": {
+      "type": "PATTERN",
+      "value": "[Pp][A-Za-z]?_\\w+"
+    },
+    "indexes": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "SYMBOL",
+          "name": "index"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "SYMBOL",
+                "name": "index"
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "index": {
+      "type": "PATTERN",
+      "value": "\\d+"
+    },
+    "_argument": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "hex_argument"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ipv4_argument"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "numeric_argument"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_literal_argument"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_argument"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "template"
+        }
+      ]
+    },
+    "hex_argument": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "0x"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "template"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_hex"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "template": {
+      "type": "PATTERN",
+      "value": "<[\\w_-]+>"
+    },
+    "numeric_argument": {
+      "type": "PATTERN",
+      "value": "-?\\d+"
+    },
+    "string_literal_argument": {
+      "type": "PATTERN",
+      "value": "\"[^\"]*\""
+    },
+    "string_argument": {
+      "type": "PATTERN",
+      "value": "[A-Za-f][A-Za-f0-9_]+"
+    },
+    "ipv4_argument": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])"
+          },
+          {
+            "type": "STRING",
+            "value": "."
+          },
+          {
+            "type": "PATTERN",
+            "value": "(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])"
+          },
+          {
+            "type": "STRING",
+            "value": "."
+          },
+          {
+            "type": "PATTERN",
+            "value": "(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])"
+          },
+          {
+            "type": "STRING",
+            "value": "."
+          },
+          {
+            "type": "PATTERN",
+            "value": "(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])"
+          }
+        ]
+      }
+    },
+    "_hex": {
+      "type": "PATTERN",
+      "value": "[A-Fa-f\\d]+"
+    },
+    "port_comment": {
+      "type": "PATTERN",
+      "value": ";[ \\t]*Port:[ \\t]*\\d+\\/\\d+[ \\t]*"
+    },
+    "comment": {
+      "type": "PATTERN",
+      "value": ";[^\\n\\r]*"
+    },
+    "_line_ending": {
+      "type": "PATTERN",
+      "value": "[\\n\\r]+"
+    },
+    "_whitespace": {
+      "type": "PATTERN",
+      "value": "[ \\t]+"
+    }
+  },
+  "extras": [],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}
+
