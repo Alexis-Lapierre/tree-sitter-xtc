@@ -1,13 +1,15 @@
 (parameter) @function.builtin
 
-(template) @tag
+(template) @variable
 
 [
   (hex_argument)
   (ipv4_argument)
 ] @attribute
 
-[(numeric_argument)] @number
+(numeric_argument) @constant.numeric
+
+(index) @tag
 
 (string_literal_argument) @string
 
