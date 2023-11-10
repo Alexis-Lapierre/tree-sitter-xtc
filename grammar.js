@@ -1,7 +1,7 @@
 const zeroTo255 = /(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])/;
 
 module.exports = grammar({
-  name: "XTC",
+  name: "xtc",
 
   extras: $ => [],
 
