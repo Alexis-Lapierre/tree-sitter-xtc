@@ -18,7 +18,8 @@
   },
   "tree-sitter": [{
     "file-types": [
-      "xtc"
+      "xtc",
+      "xpc"
     ],
     "highlights": [
       "queries/highlights.scm"
