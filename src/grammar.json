@@ -253,7 +253,7 @@
     },
     "port_comment": {
       "type": "PATTERN",
-      "value": ";[ \\t]*Port:[ \\t]*\\d+\\/\\d+[ \\t]*"
+      "value": ";[ \\t]*Port[ \\t]:[ \\t]*\\d+\\/\\d+[ \\t]*"
     },
     "comment": {
       "type": "PATTERN",

@@ -65,7 +65,7 @@ module.exports = grammar({
 
     _hex: $ => /[A-Fa-f\d]+/,
 
-    port_comment: $ => /;[ \t]*Port:[ \t]*\d+\/\d+[ \t]*/,
+    port_comment: $ => /;[ \t]*Port[ \t]:[ \t]*\d+\/\d+[ \t]*/,
     comment: $ => /;[^\n\r]*/,
     _line_ending: $ => /[\n\r]+/,
 
