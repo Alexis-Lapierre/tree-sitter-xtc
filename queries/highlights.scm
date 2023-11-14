@@ -1,5 +1,7 @@
 (parameter) @function.builtin
 
+(change_port) @module
+
 (template) @variable
 
 [
