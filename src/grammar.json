@@ -11,8 +11,28 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "_line"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_whitespace"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_line"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           },
           {
             "type": "SYMBOL",
@@ -30,15 +50,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "port_comment"
-        },
-        {
-          "type": "SYMBOL",
           "name": "comment"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_whitespace"
         }
       ]
     },
@@ -85,6 +97,19 @@
               }
             ]
           }
+        }
+      ]
+    },
+    "parameter": {
+      "type": "PATTERN",
+      "value": "([Pp][Ee]|[CMPcmp])[A-Za-z]?_\\w+"
+    },
+    "indexes": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
         },
         {
           "type": "CHOICE",
@@ -97,19 +122,6 @@
               "type": "BLANK"
             }
           ]
-        }
-      ]
-    },
-    "parameter": {
-      "type": "PATTERN",
-      "value": "[Pp][A-Za-z]?_\\w+"
-    },
-    "indexes": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "["
         },
         {
           "type": "SYMBOL",
@@ -121,8 +133,32 @@
             "type": "SEQ",
             "members": [
               {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_whitespace"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
                 "type": "STRING",
                 "value": ","
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_whitespace"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
               },
               {
                 "type": "SYMBOL",
@@ -130,6 +166,18 @@
               }
             ]
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_whitespace"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -249,15 +297,36 @@
     },
     "_hex": {
       "type": "PATTERN",
-      "value": "[A-Fa-f\\d]+"
+      "value": "[A-Fa-f\\d]"
+    },
+    "comment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ";"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "port_comment"
+              },
+              {
+                "type": "PATTERN",
+                "value": "[^\\n\\r]"
+              }
+            ]
+          }
+        }
+      ]
     },
     "port_comment": {
       "type": "PATTERN",
-      "value": ";[ \\t]*Port[ \\t]:[ \\t]*\\d+\\/\\d+[ \\t]*"
-    },
-    "comment": {
-      "type": "PATTERN",
-      "value": ";[^\\n\\r]*"
+      "value": "Port[ \\t]*:[ \\t]*\\d+\\/\\d+"
     },
     "_line_ending": {
       "type": "PATTERN",

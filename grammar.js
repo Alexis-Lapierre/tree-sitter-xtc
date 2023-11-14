@@ -8,27 +8,35 @@ module.exports = grammar({
   rules: {
     program: $ => $._lines,
 
-    _lines: $ => repeat1(seq($._line, $._line_ending)),
+    _lines: $ => repeat1(seq(
+      optional($._whitespace),
+      optional($._line),
+      $._line_ending,
+    )),
     
     _line: $ => choice(
       $.command,
-      $.port_comment,
       $.comment,
-      $._whitespace,
     ),
 
     command: $ => seq(
       $.parameter,
       optional(seq($._whitespace, $.indexes)),
       repeat(seq($._whitespace, $._argument)),
-      optional($._whitespace)
     ),
 
-    parameter: $ => /[Pp][A-Za-z]?_\w+/,
+    parameter: $ => /([Pp][Ee]|[CMPcmp])[A-Za-z]?_\w+/,
     indexes: $ => seq(
       '[',
+      optional($._whitespace),
       $.index,
-      repeat(seq(',', $.index)),
+      repeat(seq(
+        optional($._whitespace),
+        ',',
+        optional($._whitespace),
+        $.index
+      )),
+      optional($._whitespace),
       ']',
     ),
 
@@ -63,12 +71,19 @@ module.exports = grammar({
       zeroTo255,
     )),
 
-    _hex: $ => /[A-Fa-f\d]+/,
+    _hex: $ => /[A-Fa-f\d]/,
 
-    port_comment: $ => /;[ \t]*Port[ \t]:[ \t]*\d+\/\d+[ \t]*/,
-    comment: $ => /;[^\n\r]*/,
+    comment: $ => seq(
+      ";",
+      repeat(choice(
+        $.port_comment,
+        /[^\n\r]/,
+      ))
+    ),
+
+    port_comment: $ => /Port[ \t]*:[ \t]*\d+\/\d+/,
+
     _line_ending: $ => /[\n\r]+/,
-
     _whitespace: $ => /[ \t]+/,
   },
 });

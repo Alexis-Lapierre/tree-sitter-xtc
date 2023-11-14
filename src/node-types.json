@@ -43,6 +43,21 @@
     }
   },
   {
+    "type": "comment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "port_comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "hex_argument",
     "named": true,
     "fields": {},
@@ -87,10 +102,6 @@
         {
           "type": "comment",
           "named": true
-        },
-        {
-          "type": "port_comment",
-          "named": true
         }
       ]
     }
@@ -104,16 +115,16 @@
     "named": false
   },
   {
+    "type": ";",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
   {
     "type": "]",
     "named": false
-  },
-  {
-    "type": "comment",
-    "named": true
   },
   {
     "type": "index",
