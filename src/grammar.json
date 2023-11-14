@@ -35,7 +35,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "changePort"
+                  "name": "change_port"
                 },
                 {
                   "type": "CHOICE",
@@ -83,7 +83,7 @@
         }
       ]
     },
-    "changePort": {
+    "change_port": {
       "type": "PATTERN",
       "value": "\\d+\\/\\d+"
     },

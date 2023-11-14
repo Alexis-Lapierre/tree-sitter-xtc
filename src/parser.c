@@ -18,7 +18,7 @@
 
 enum {
   aux_sym__line_token1 = 1,
-  sym_changePort = 2,
+  sym_change_port = 2,
   sym_parameter = 3,
   anon_sym_LBRACK = 4,
   anon_sym_COMMA = 5,
@@ -52,7 +52,7 @@ enum {
 static const char * const ts_symbol_names[] = {
   [ts_builtin_sym_end] = "end",
   [aux_sym__line_token1] = "_line_token1",
-  [sym_changePort] = "changePort",
+  [sym_change_port] = "change_port",
   [sym_parameter] = "parameter",
   [anon_sym_LBRACK] = "[",
   [anon_sym_COMMA] = ",",
@@ -86,7 +86,7 @@ static const char * const ts_symbol_names[] = {
 static const TSSymbol ts_symbol_map[] = {
   [ts_builtin_sym_end] = ts_builtin_sym_end,
   [aux_sym__line_token1] = aux_sym__line_token1,
-  [sym_changePort] = sym_changePort,
+  [sym_change_port] = sym_change_port,
   [sym_parameter] = sym_parameter,
   [anon_sym_LBRACK] = anon_sym_LBRACK,
   [anon_sym_COMMA] = anon_sym_COMMA,
@@ -126,7 +126,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = false,
   },
-  [sym_changePort] = {
+  [sym_change_port] = {
     .visible = true,
     .named = true,
   },
@@ -554,7 +554,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == ' ') ADVANCE(40);
       END_STATE();
     case 41:
-      ACCEPT_TOKEN(sym_changePort);
+      ACCEPT_TOKEN(sym_change_port);
       if (('0' <= lookahead && lookahead <= '9')) ADVANCE(41);
       END_STATE();
     case 42:
@@ -763,7 +763,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym_command] = STATE(47),
     [sym_comment] = STATE(47),
     [aux_sym__line_token1] = ACTIONS(3),
-    [sym_changePort] = ACTIONS(5),
+    [sym_change_port] = ACTIONS(5),
     [sym_parameter] = ACTIONS(7),
     [anon_sym_SEMI] = ACTIONS(9),
     [sym__line_ending] = ACTIONS(11),
@@ -775,7 +775,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       aux_sym__line_token1,
     ACTIONS(5), 1,
-      sym_changePort,
+      sym_change_port,
     ACTIONS(7), 1,
       sym_parameter,
     ACTIONS(9), 1,
@@ -813,7 +813,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(27), 1,
       aux_sym__line_token1,
     ACTIONS(30), 1,
-      sym_changePort,
+      sym_change_port,
     ACTIONS(33), 1,
       sym_parameter,
     ACTIONS(36), 1,
@@ -845,7 +845,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(9), 1,
       anon_sym_SEMI,
     ACTIONS(42), 1,
-      sym_changePort,
+      sym_change_port,
     ACTIONS(44), 1,
       sym__line_ending,
     STATE(51), 2,
@@ -868,7 +868,7 @@ static const uint16_t ts_small_parse_table[] = {
       aux_sym__line_token1,
     ACTIONS(48), 5,
       ts_builtin_sym_end,
-      sym_changePort,
+      sym_change_port,
       sym_parameter,
       anon_sym_SEMI,
       sym__line_ending,
@@ -877,7 +877,7 @@ static const uint16_t ts_small_parse_table[] = {
       aux_sym__line_token1,
     ACTIONS(52), 5,
       ts_builtin_sym_end,
-      sym_changePort,
+      sym_change_port,
       sym_parameter,
       anon_sym_SEMI,
       sym__line_ending,
@@ -898,7 +898,7 @@ static const uint16_t ts_small_parse_table[] = {
       aux_sym__line_token1,
     ACTIONS(60), 5,
       ts_builtin_sym_end,
-      sym_changePort,
+      sym_change_port,
       sym_parameter,
       anon_sym_SEMI,
       sym__line_ending,
@@ -907,7 +907,7 @@ static const uint16_t ts_small_parse_table[] = {
       aux_sym__line_token1,
     ACTIONS(64), 5,
       ts_builtin_sym_end,
-      sym_changePort,
+      sym_change_port,
       sym_parameter,
       anon_sym_SEMI,
       sym__line_ending,

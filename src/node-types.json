@@ -96,7 +96,7 @@
       "required": false,
       "types": [
         {
-          "type": "changePort",
+          "type": "change_port",
           "named": true
         },
         {
@@ -131,7 +131,7 @@
     "named": false
   },
   {
-    "type": "changePort",
+    "type": "change_port",
     "named": true
   },
   {
