@@ -96,6 +96,10 @@
       "required": false,
       "types": [
         {
+          "type": "changePort",
+          "named": true
+        },
+        {
           "type": "command",
           "named": true
         },
@@ -125,6 +129,10 @@
   {
     "type": "]",
     "named": false
+  },
+  {
+    "type": "changePort",
+    "named": true
   },
   {
     "type": "index",

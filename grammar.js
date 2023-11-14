@@ -1,4 +1,10 @@
 const zeroTo255 = /(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])/;
+const hexDigit = /[A-Za-z0-9]/;
+const number = /\d+/;
+
+const space = /[ \t]+/;
+const maybeSpace = /[ \t]*/;
+
 
 module.exports = grammar({
   name: "xtc",
@@ -8,35 +14,34 @@ module.exports = grammar({
   rules: {
     program: $ => $._lines,
 
-    _lines: $ => repeat1(seq(
-      optional($._whitespace),
-      optional($._line),
-      $._line_ending,
-    )),
+    _lines: $ => repeat1($._line),
     
-    _line: $ => choice(
-      $.command,
-      $.comment,
+    _line: $ => seq(
+      maybeSpace,
+      optional(seq(
+        $.changePort,
+        maybeSpace,
+      )),
+      choice(
+        $.command,
+        $.comment,
+      ),
+      $._line_ending,
     ),
 
+    changePort: $ => /\d+\/\d+/,
+    
     command: $ => seq(
       $.parameter,
-      optional(seq($._whitespace, $.indexes)),
-      repeat(seq($._whitespace, $._argument)),
+      optional(seq(space, $.indexes)),
+      repeat(seq(space, $._argument)),
     ),
 
     parameter: $ => /([Pp][Ee]|[CMPcmp])[A-Za-z]?_\w+/,
     indexes: $ => seq(
-      '[',
-      optional($._whitespace),
-      $.index,
-      repeat(seq(
-        optional($._whitespace),
-        ',',
-        optional($._whitespace),
-        $.index
-      )),
-      optional($._whitespace),
+      '[', maybeSpace, $.index,
+      repeat(seq( maybeSpace, ',', maybeSpace, $.index )),
+      maybeSpace,
       ']',
     ),
 
@@ -56,7 +61,7 @@ module.exports = grammar({
       repeat1(
         choice(
           $.template,
-          $._hex,
+          hexDigit,
       ))
     ),
 
@@ -71,7 +76,6 @@ module.exports = grammar({
       zeroTo255,
     )),
 
-    _hex: $ => /[A-Fa-f\d]/,
 
     comment: $ => seq(
       ";",
@@ -81,10 +85,15 @@ module.exports = grammar({
       ))
     ),
 
-    port_comment: $ => /Port[ \t]*:[ \t]*\d+\/\d+/,
+    port_comment: $ => token(seq(
+      "Port", maybeSpace,
+      ":",    maybeSpace,
+      number, maybeSpace,
+      "/",    maybeSpace,
+      number
+    )),
 
-    _line_ending: $ => /[\n\r]+/,
-    _whitespace: $ => /[ \t]+/,
+    _line_ending: $ => token(seq(maybeSpace, /[\n\r]+/))
   },
 });
 
