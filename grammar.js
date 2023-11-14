@@ -3,7 +3,7 @@ const hexDigit = /[A-Za-z0-9]/;
 const number = /\d+/;
 
 const space = /[ \t]+/;
-const maybeSpace = /[ \t]*/;
+const maybeSpace = optional(space);
 
 
 module.exports = grammar({
@@ -22,10 +22,10 @@ module.exports = grammar({
         $.changePort,
         maybeSpace,
       )),
-      choice(
+      optional(choice(
         $.command,
         $.comment,
-      ),
+      )),
       $._line_ending,
     ),
 
