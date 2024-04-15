@@ -1,6 +1,6 @@
-(parameter) @function.builtin
+(parameter) @keyword
 
-(change_port) @module
+(change_port) @function.special
 
 (template) @variable
 
@@ -15,9 +15,13 @@
 
 (string_literal_argument) @string
 
-(string_argument) @keyword
+(string_argument) @constant.character
 
 (comment) @comment
 
-(port_comment) @string.special
+(port_comment) @label
 
+[
+("[") 
+("]")
+] @punctuation.bracket
